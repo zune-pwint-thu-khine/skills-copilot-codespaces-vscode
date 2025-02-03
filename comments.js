@@ -1,35 +1,24 @@
 // Create web server
-// npm install express
-// npm install body-parser
-// npm install mongoose
-// npm install ejs
-// npm install express-sanitizer
-// npm install method-override
-// npm install nodemon
-// npm install passport
-// npm install passport-local
-// npm install passport-local-mongoose
-// npm install express-session
+// Create a route for comments
+// Send back a JSON response of the comments
 
-// App Config
-var express = require("express"),
-    app = express(),
-    bodyParser = require("body-parser"),
-    mongoose = require("mongoose"),
-    ejs = require("ejs"),
-    expressSanitizer = require("express-sanitizer"),
-    methodOverride = require("method-override"),
-    passport = require("passport"),
-    LocalStrategy = require("passport-local"),
-    passportLocalMongoose = require("passport-local-mongoose"),
-    expressSession = require("express-session");
+var express = require('express');
+var app = express();
+var comments = require('./comments');
 
-mongoose.connect("mongodb://localhost:27017/comments", { useNewUrlParser: true });
-app.set("view engine", "ejs");
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressSanitizer());
-app.use(methodOverride("_method"));
+app.get('/comments', function(req, res) {
+  res.json(comments);
+});
 
-// Model Config
-var commentSchema = new mongoose.Schema({
+app.listen(3000, function() {
+  console.log('Server is listening on port 3000');
+});
+
+// Run the server
+// Visit http://localhost:3000/comments in your browser
+// You should see the comments displayed as JSON
+
+// Add a new comment
+// Add a new comment to the array of comments in comments.js
+// Refresh the page in your browser
+// You should see the new comment displayed in the JSON response
